@@ -176,3 +176,15 @@ Future improvements:
 - Add availability tests
 - Add custom domain and HTTPS certificate
 - Add more monitoring dashboards
+
+### Azure App Service Overview
+
+![Azure App Service Overview](screenshots/azure-app-service-overview.png)
+
+### Azure Key Vault Secret
+
+![Azure Key Vault Secret](screenshots/key-vault-secret.png)
+
+### Managed Identity
+
+![Managed Identity](screenshots/managed-identity.png)
