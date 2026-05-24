@@ -18,6 +18,26 @@ output "app_service_plan_name" {
   value       = azurerm_service_plan.main.name
 }
 
+output "key_vault_name" {
+  description = "Name of the Azure Key Vault."
+  value       = azurerm_key_vault.main.name
+}
+
+output "key_vault_secret_name" {
+  description = "Name of the Key Vault secret used by the app."
+  value       = azurerm_key_vault_secret.project_message.name
+}
+
+output "managed_identity_name" {
+  description = "Name of the user-assigned managed identity."
+  value       = azurerm_user_assigned_identity.web_app_identity.name
+}
+
+output "managed_identity_principal_id" {
+  description = "Principal ID of the user-assigned managed identity."
+  value       = azurerm_user_assigned_identity.web_app_identity.principal_id
+}
+
 output "application_insights_name" {
   description = "Name of the Application Insights resource."
   value       = azurerm_application_insights.main.name
