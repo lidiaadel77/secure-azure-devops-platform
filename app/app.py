@@ -1,14 +1,18 @@
-﻿from flask import Flask, jsonify
+﻿import os
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def home():
-    return """
+    project_message = os.getenv("PROJECT_MESSAGE", "Local development mode")
+
+    return f"""
     <h1>Secure Azure DevOps Platform</h1>
-    <p>This Flask app is prepared for Azure App Service deployment.</p>
-    <p>The platform will include Terraform, GitHub Actions, Key Vault, Managed Identity, and Azure Monitor.</p>
+    <p>This Flask app is deployed on Azure App Service.</p>
+    <p>The platform includes Terraform, GitHub Actions, Key Vault, Managed Identity, and Azure Monitor.</p>
+    <p><strong>Configuration source:</strong> {project_message}</p>
     """
 
 
@@ -17,6 +21,16 @@ def health():
     return jsonify({
         "status": "ok",
         "service": "secure-azure-devops-platform"
+    })
+
+
+@app.route("/config-check")
+def config_check():
+    project_message = os.getenv("PROJECT_MESSAGE")
+
+    return jsonify({
+        "project_message_configured": project_message is not None,
+        "message_preview": project_message if project_message else "Not configured"
     })
 
 
