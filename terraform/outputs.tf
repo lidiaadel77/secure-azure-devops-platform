@@ -47,3 +47,8 @@ output "log_analytics_workspace_name" {
   description = "Name of the Log Analytics Workspace."
   value       = azurerm_log_analytics_workspace.main.name
 }
+
+output "web_app_5xx_alert_name" {
+  description = "Name of the Azure Monitor alert for Web App HTTP 5xx errors."
+  value       = azurerm_monitor_metric_alert.web_app_http_5xx.name
+}

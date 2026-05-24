@@ -146,3 +146,22 @@ resource "azurerm_application_insights" "main" {
   workspace_id     = azurerm_log_analytics_workspace.main.id
   application_type = "web"
 }
+
+resource "azurerm_monitor_metric_alert" "web_app_http_5xx" {
+  name                = "alert-${var.project_name}-http-5xx-${random_string.suffix.result}"
+  resource_group_name = azurerm_resource_group.main.name
+  scopes              = [azurerm_linux_web_app.main.id]
+  description         = "Alert when the Azure Web App returns HTTP 5xx server errors."
+  severity            = 2
+  frequency           = "PT5M"
+  window_size         = "PT5M"
+  enabled             = true
+
+  criteria {
+    metric_namespace = "Microsoft.Web/sites"
+    metric_name      = "Http5xx"
+    aggregation      = "Total"
+    operator         = "GreaterThan"
+    threshold        = 5
+  }
+}
